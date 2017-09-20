@@ -19,10 +19,7 @@ function previous(){
 }
 
 function next(){
-
     img.setAttribute("style", "opacity: 0.0");
-
-
   if(idx === photos.length-1){
     idx = 0;
   }else {
@@ -41,9 +38,13 @@ function updatePhoto(){
 
 
   setTimeout(function(){
-    img.setAttribute("style", "opacity: 1");
     img.setAttribute("src", photos[idx]);
+    img.setAttribute("style", "opacity: 0.5");
+    setTimeout(function(){
+      img.setAttribute("style", "opacity: 1");
+    }, 500);
   }, 500);
+
   currentImg.appendChild(img);
 }
 var prevBtn = document.getElementById("prev");
