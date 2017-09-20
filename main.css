@@ -7,6 +7,7 @@
 #slider > img {
   max-width: 200px;
   max-height: 200px;
+
 }
 
 #prev, #next {
@@ -17,4 +18,11 @@
 
 .container {
   display: flex;
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
 }
