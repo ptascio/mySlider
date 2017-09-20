@@ -1,0 +1,20 @@
+#slider {
+  border: 1px solid #000;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+#slider > img {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+#prev, #next {
+  font-size: 20px;
+  margin: 50px;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+}
