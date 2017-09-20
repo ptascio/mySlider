@@ -7,7 +7,9 @@
 #slider > img {
   max-width: 200px;
   max-height: 200px;
-
+  opacity: 1;
+  -webkit-transition: opacity 1000ms linear;
+  transition: opacity 1000ms linear;
 }
 
 #prev, #next {

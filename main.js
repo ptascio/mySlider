@@ -7,21 +7,30 @@ var photos = [
 var idx = 0;
 
 function previous(){
+  img.setAttribute("style", "opacity: 0.0");
   if(idx === 0){
     idx = photos.length-1;
   }else {
     idx-=1;
   }
-  updatePhoto();
+  setTimeout(function(){
+    updatePhoto();
+  }, 1000);
 }
 
 function next(){
+
+    img.setAttribute("style", "opacity: 0.0");
+
+
   if(idx === photos.length-1){
     idx = 0;
   }else {
     idx+=1;
   }
-  updatePhoto();
+  setTimeout(function(){
+    updatePhoto();
+  }, 1000);
 }
 
 var currentImg = document.getElementById("slider");
@@ -29,7 +38,12 @@ var img = document.createElement("img");
 img.setAttribute("src", photos[idx]);
 currentImg.appendChild(img);
 function updatePhoto(){
-  img.setAttribute("src", photos[idx]);
+
+
+  setTimeout(function(){
+    img.setAttribute("style", "opacity: 1");
+    img.setAttribute("src", photos[idx]);
+  }, 500);
   currentImg.appendChild(img);
 }
 var prevBtn = document.getElementById("prev");
