@@ -30,7 +30,7 @@ function next(){
   }, 1000);
 }
 
-var currentImg = document.getElementById("slider");
+var currentImg = document.getElementById("fade-slider");
 var img = document.createElement("img");
 img.setAttribute("src", photos[idx]);
 currentImg.appendChild(img);
@@ -47,7 +47,7 @@ function updatePhoto(){
 
   currentImg.appendChild(img);
 }
-var prevBtn = document.getElementById("prev");
-var nextBtn = document.getElementById("next");
-prevBtn.addEventListener("click", () => {previous();});
-nextBtn.addEventListener("click", () => {next();});
+var fadePrevBtn = document.getElementById("fade-prev");
+var fadeNextBtn = document.getElementById("fade-next");
+fadePrevBtn.addEventListener("click", () => {previous();});
+fadeNextBtn.addEventListener("click", () => {next();});
