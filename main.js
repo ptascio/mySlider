@@ -58,22 +58,27 @@ slideSliderContainer.appendChild(slideImg);
 
 var slideNextBtn = document.getElementById("slide-next");
 slideNextBtn.addEventListener("click", () => {slideRight();});
-function slideRight(){
   var timer = 1000;
   var marginLeft = 0;
+function slideRight(){
   var marginLeftSent = `margin-left: ${marginLeft}px`;
-  while (timer < 6000){
-    marginLeft+=5;
+  while (marginLeft < 150){
+    marginLeft+=1;
     marginLeftSent = `margin-left: ${marginLeft}px;`;
-    moveOver(marginLeftSent, timer);
-    timer+=1000;
+    // window.requestAnimationFrame(() => {moveOver(marginLeftSent);});
+    moveOver(marginLeftSent, marginLeft);
+    console.log(marginLeft);
   }
-
 }
+var cancelInterval;
+function moveOver(margin, mL){
 
-function moveOver(margin, time){
-  setTimeout(function() {
-    console.log(margin);
-      slideImg.setAttribute("style", margin);
-  }, time);
+  cancelInterval = setInterval(function() {
+    slideImg.setAttribute("style", margin);
+  }, 100);
+  if (mL === 150){
+      console.log("in here");
+  clearInterval(cancelInterval);
+  return;
+  }
 }
