@@ -87,11 +87,9 @@ function moveOver(margin, mL){
 function addNewPhoto(){
   idx+=1;
   marginLeft = 0;
-  slideImg.setAttribute("src", photos[idx]);
-  slideImg.style.marginRight = "200px";
   slideImg.style.border = "1px solid red";
-  slideImg.style.marginLeft = "0px";
-  Object.assign(slideImg.style,{marginRight: 100, opacity: 1});
+  slideImg.style.marginLeft = "-100px";
+  slideImg.style.opacity = "1";
   console.log(slideImg);
   slideSliderContainer.appendChild(slideImg);
 }
