@@ -61,29 +61,52 @@ slideImg.setAttribute("src", photos[slideIdx]);
 slideSliderContainer.appendChild(slideImg);
 
 var slideNextBtn = document.getElementById("slide-next");
-slideNextBtn.addEventListener("click", () => {slideRight();});
-  var timer = 1000;
-  var marginLeft = 0;
-  var marginLeftSent = `margin-left: ${marginLeft}px`;
-function slideRight(){
+slideNextBtn.addEventListener("click", () => {animateSlideRight();});
+var timer = 1000;
+var marginLeft = 0;
+var marginLeftSent = `margin-left: ${marginLeft}px`;
 
+function animateSlideRight(){
+  window.requestAnimationFrame(moveImgRight);
+}
+var opacity = 1;
+function moveImgRight(){
+  marginLeft+=5;
+  opacity-=0.1;
+  slideImg.style.marginLeft = marginLeft.toString() + "px";
+  slideImg.style.opacity = opacity.toString();
+  if (marginLeft < 200 && opacity > 0){
+
+    window.requestAnimationFrame(moveImgRight);
+  }else {
+    getOut();
+  }
+}
+
+function slideRight(){
   Object.assign(slideImg.style,{opacity:0});
-  setTimeout(function() {
+  // setTimeout(function() {
     while (marginLeft < 150){
+        timer+=1000;
       marginLeft+=0.5;
       marginLeftSent = `margin-left: ${marginLeft}px;`;
-      // window.requestAnimationFrame(() => {moveOver(marginLeftSent);});
       moveOver(marginLeftSent, marginLeft);
     }
-  }, 100);
+  // }, 100);
 setTimeout(function() {
   getOut();
+
 }, 1000);
 }
 
 function getOut(){
+
   slideImg.parentNode.removeChild(slideImg);
   addNewPhoto();
+  // setTimeout(function() {
+  //   addNewPhoto();
+  // }, 1000);
+
 }
 function moveOver(margin, mL, fadein){
   // if (fadein){
@@ -107,30 +130,13 @@ function addNewPhoto(){
 }
 
 function slideInNewPic(){
+  marginLeft+=5;
 
-  var opacity = 0;
-  setTimeout(function() {
-    while(opacity < 1){
-      opacity+=0.1;
-      slideImg.style.opacity = opacity.toString();
-    }
-  }, 10);
+  opacity+=0.1;
+  slideImg.style.marginLeft = marginLeft.toString() + "px";
+  if (marginLeft < 0){
 
-  setTimeout(function() {
-    while(marginLeft < 0){
-      marginLeft+=0.5;
-      marginLeftSent = `margin-left: ${marginLeft}px;`;
-      moveOver(marginLeftSent, marginLeft, true);
-    }
-  }, 100);
-}
-
-function fadeIn(){
-  var opacity = 0;
-  setTimeout(function() {
-    while(opacity < 1){
-      opacity+=0.1;
-      slideImg.style.opacity = opacity.toString();
-    }
-  }, 10);
+    slideImg.style.opacity = opacity.toString();
+    window.requestAnimationFrame(slideInNewPic);
+  }
 }
