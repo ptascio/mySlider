@@ -149,6 +149,8 @@ function destroyPic(){
   if (photos.length === 0){
     var src = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
     slideImg.setAttribute("src", src);
+    img.setAttribute("src", src);
+    fadeSliderContainer.appendChild(img);
     slideSliderContainer.appendChild(slideImg);
   }else {
     if (slideIdx === photos.length){
