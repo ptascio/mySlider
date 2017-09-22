@@ -146,6 +146,7 @@ function destroyPic(){
   var firstHalf = photos.slice(0, slideIdx);
   var secondHalf = photos.slice(slideIdx+1);
   photos = firstHalf.concat(secondHalf);
+  debugger
   slideImg.setAttribute("src", photos[slideIdx]);
   slideSliderContainer.appendChild(slideImg);
 }
@@ -157,11 +158,18 @@ function addPic(e){
   var newUrl = document.getElementById("newUrl").value;
   if (newUrl.length === 0){
     return;
-  }else {
+  }else if (!checkURL(newUrl)){
+    document.getElementById("newUrl").value = "";
+    return;
+  } else {
   photos.push(newUrl);
   slideIdx = photos.length - 1;
   slideImg.setAttribute("src", photos[slideIdx]);
   slideSliderContainer.appendChild(slideImg);
   document.getElementById("newUrl").value = "";
   }
+}
+
+function checkURL(url) {
+    return(url.match(/\.(jpeg|jpg|gif|png)$/) !== null);
 }
