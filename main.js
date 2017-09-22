@@ -4,6 +4,7 @@ var photos = [
   "http://media.guitarcenter.com/is/image/MMGS7/ES-Les-Paul-Semi-Hollow-Electric-Guitar-Light-Caramel-Burst/J08747000001000-00-500x500.jpg"
 ];
 
+//fade container
 var idx = 0;
 
 function previous(){
@@ -51,20 +52,24 @@ fadePrevBtn.addEventListener("click", () => {previous();});
 fadeNextBtn.addEventListener("click", () => {next();});
 
 
+
+//slide container
+var slideIdx = 0;
 var slideSliderContainer = document.getElementById("slide-slider");
 var slideImg = document.createElement("img");
-slideImg.setAttribute("src", photos[idx]);
+slideImg.setAttribute("src", photos[slideIdx]);
 slideSliderContainer.appendChild(slideImg);
 
 var slideNextBtn = document.getElementById("slide-next");
 slideNextBtn.addEventListener("click", () => {slideRight();});
   var timer = 1000;
   var marginLeft = 0;
-function slideRight(){
   var marginLeftSent = `margin-left: ${marginLeft}px`;
+function slideRight(){
+
   Object.assign(slideImg.style,{opacity:0});
   setTimeout(function() {
-    while (marginLeft < 100){
+    while (marginLeft < 150){
       marginLeft+=0.5;
       marginLeftSent = `margin-left: ${marginLeft}px;`;
       // window.requestAnimationFrame(() => {moveOver(marginLeftSent);});
@@ -80,16 +85,52 @@ function getOut(){
   slideImg.parentNode.removeChild(slideImg);
   addNewPhoto();
 }
-function moveOver(margin, mL){
+function moveOver(margin, mL, fadein){
+  // if (fadein){
+  //   fadeIn();
+  // }
   Object.assign(slideImg.style,{marginLeft: `${mL}px`});
 }
 
 function addNewPhoto(){
-  idx+=1;
-  marginLeft = 0;
-  slideImg.style.border = "1px solid red";
-  slideImg.style.marginLeft = "-100px";
-  slideImg.style.opacity = "1";
-  console.log(slideImg);
+  if (slideIdx === photos.length - 1){
+    slideIdx = 0;
+  }else {
+    slideIdx+=1;
+  }
+  marginLeft = -200;
+  slideImg.setAttribute("src", photos[slideIdx]);
+  slideImg.style.marginLeft = "-200px";
+
   slideSliderContainer.appendChild(slideImg);
+  slideInNewPic();
+}
+
+function slideInNewPic(){
+
+  var opacity = 0;
+  setTimeout(function() {
+    while(opacity < 1){
+      opacity+=0.1;
+      slideImg.style.opacity = opacity.toString();
+    }
+  }, 10);
+
+  setTimeout(function() {
+    while(marginLeft < 0){
+      marginLeft+=0.5;
+      marginLeftSent = `margin-left: ${marginLeft}px;`;
+      moveOver(marginLeftSent, marginLeft, true);
+    }
+  }, 100);
+}
+
+function fadeIn(){
+  var opacity = 0;
+  setTimeout(function() {
+    while(opacity < 1){
+      opacity+=0.1;
+      slideImg.style.opacity = opacity.toString();
+    }
+  }, 10);
 }
