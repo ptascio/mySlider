@@ -62,9 +62,9 @@ slideNextBtn.addEventListener("click", () => {slideRight();});
   var marginLeft = 0;
 function slideRight(){
   var marginLeftSent = `margin-left: ${marginLeft}px`;
-  Object.assign(slideImg.style,{opacity:0.1});
+  Object.assign(slideImg.style,{opacity:0});
   setTimeout(function() {
-    while (marginLeft < 150){
+    while (marginLeft < 100){
       marginLeft+=0.5;
       marginLeftSent = `margin-left: ${marginLeft}px;`;
       // window.requestAnimationFrame(() => {moveOver(marginLeftSent);});
@@ -78,13 +78,20 @@ setTimeout(function() {
 
 function getOut(){
   slideImg.parentNode.removeChild(slideImg);
+  addNewPhoto();
 }
-var cancelInterval;
 function moveOver(margin, mL){
-  console.log(mL);
-Object.assign(slideImg.style,{marginLeft: `${mL}px`});
-  // if (mL === 150){
-  //
-  // }
+  Object.assign(slideImg.style,{marginLeft: `${mL}px`});
+}
 
+function addNewPhoto(){
+  idx+=1;
+  marginLeft = 0;
+  slideImg.setAttribute("src", photos[idx]);
+  slideImg.style.marginRight = "200px";
+  slideImg.style.border = "1px solid red";
+  slideImg.style.marginLeft = "0px";
+  Object.assign(slideImg.style,{marginRight: 100, opacity: 1});
+  console.log(slideImg);
+  slideSliderContainer.appendChild(slideImg);
 }
