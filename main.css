@@ -22,6 +22,26 @@
   cursor: pointer;
 }
 
+.big-container {
+  width: 70%;
+  margin: auto;
+}
+
+.big-container,
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form {
+  max-width: 50%;
+}
+
+form > input {
+  padding: 5px 20px;
+}
+
 .container {
   display: flex;
 }
@@ -31,4 +51,26 @@
   -webkit-animation-duration: 1.5s;
   animation-name: fade;
   animation-duration: 1.5s;
+}
+
+#addSliderPic,
+#deleteBtn {
+  text-transform: uppercase;
+  cursor: pointer;
+  letter-spacing: 2px;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+#deleteBtn {
+  background-color: red;
+  border: 1px solid red;
+
+  width: 40%;
+  margin: auto;
+}
+
+#addSliderPic {
+  background-color: blue;
+  border: 1px solid blue;
 }
