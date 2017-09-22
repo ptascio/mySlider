@@ -62,6 +62,8 @@ slideSliderContainer.appendChild(slideImg);
 
 var slideNextBtn = document.getElementById("slide-next");
 slideNextBtn.addEventListener("click", () => {animateSlideRight();});
+var slidePrevBtn = document.getElementById("slide-prev");
+slidePrevBtn.addEventListener("click", () => {animateSlideLeft();});
 var timer = 1000;
 var marginLeft = 0;
 var marginLeftSent = `margin-left: ${marginLeft}px`;
@@ -69,59 +71,51 @@ var marginLeftSent = `margin-left: ${marginLeft}px`;
 function animateSlideRight(){
   window.requestAnimationFrame(moveImgRight);
 }
-var opacity = 1;
-function moveImgRight(){
-  marginLeft+=5;
-  opacity-=0.1;
-  slideImg.style.marginLeft = marginLeft.toString() + "px";
-  slideImg.style.opacity = opacity.toString();
-  if (marginLeft < 200 && opacity > 0){
 
+function animateSlideLeft(){
+  window.requestAnimationFrame(moveImgLeft);
+}
+
+function moveImgRight(){
+  marginLeft+=10;
+  slideImg.style.marginLeft = marginLeft.toString() + "px";
+  if (marginLeft < 200){
     window.requestAnimationFrame(moveImgRight);
   }else {
     getOut();
   }
 }
 
-function slideRight(){
-  Object.assign(slideImg.style,{opacity:0});
-  // setTimeout(function() {
-    while (marginLeft < 150){
-        timer+=1000;
-      marginLeft+=0.5;
-      marginLeftSent = `margin-left: ${marginLeft}px;`;
-      moveOver(marginLeftSent, marginLeft);
-    }
-  // }, 100);
-setTimeout(function() {
-  getOut();
+function moveImgLeft(){
+  marginLeft-=10;
+  slideImg.style.marginLeft = marginLeft.toString() + "px";
+  if (marginLeft > -200){
 
-}, 1000);
+    window.requestAnimationFrame(moveImgLeft);
+  }else {
+    getOut();
+  }
 }
+
+
 
 function getOut(){
-
   slideImg.parentNode.removeChild(slideImg);
-  addNewPhoto();
-  // setTimeout(function() {
-  //   addNewPhoto();
-  // }, 1000);
 
-}
-function moveOver(margin, mL, fadein){
-  // if (fadein){
-  //   fadeIn();
-  // }
-  Object.assign(slideImg.style,{marginLeft: `${mL}px`});
+    addNewPhoto();
 }
 
-function addNewPhoto(){
+function addNewPhoto(left){
   if (slideIdx === photos.length - 1){
     slideIdx = 0;
   }else {
     slideIdx+=1;
   }
-  marginLeft = -200;
+  if (marginLeft === -200){
+    marginLeft = 200;
+  }else {
+    marginLeft = -200;
+  }
   slideImg.setAttribute("src", photos[slideIdx]);
   slideImg.style.marginLeft = "-200px";
 
@@ -130,13 +124,13 @@ function addNewPhoto(){
 }
 
 function slideInNewPic(){
-  marginLeft+=5;
-
-  opacity+=0.1;
+  if (marginLeft > 0){
+    marginLeft-=10;
+  }else {
+  marginLeft+=10;
+  }
   slideImg.style.marginLeft = marginLeft.toString() + "px";
-  if (marginLeft < 0){
-
-    slideImg.style.opacity = opacity.toString();
+  if (marginLeft !== 0){
     window.requestAnimationFrame(slideInNewPic);
   }
 }
