@@ -117,7 +117,7 @@ function addNewPhoto(left){
     marginLeft = -200;
   }
   slideImg.setAttribute("src", photos[slideIdx]);
-  slideImg.style.marginLeft = "-200px";
+  slideImg.style.marginLeft = marginLeft + "px";
 
   slideSliderContainer.appendChild(slideImg);
   slideInNewPic();
@@ -133,4 +133,13 @@ function slideInNewPic(){
   if (marginLeft !== 0){
     window.requestAnimationFrame(slideInNewPic);
   }
+}
+
+var btn = document.getElementById("deleteBtn");
+btn.addEventListener("click", destroyPic);
+function destroyPic(){
+  var firstHalf = photos.slice(0, slideIdx);
+  var secondHalf = photos.slice(slideIdx+1);
+  photos = firstHalf.concat(secondHalf);
+  return photos;
 }
