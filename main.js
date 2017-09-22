@@ -146,9 +146,17 @@ function destroyPic(){
   var firstHalf = photos.slice(0, slideIdx);
   var secondHalf = photos.slice(slideIdx+1);
   photos = firstHalf.concat(secondHalf);
-  debugger
-  slideImg.setAttribute("src", photos[slideIdx]);
-  slideSliderContainer.appendChild(slideImg);
+  if (photos.length === 0){
+    var src = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
+    slideImg.setAttribute("src", src);
+    slideSliderContainer.appendChild(slideImg);
+  }else {
+    if (slideIdx === photos.length){
+      slideIdx-=1;
+    }
+    slideImg.setAttribute("src", photos[slideIdx]);
+    slideSliderContainer.appendChild(slideImg);
+  }
 }
 
 var addSliderPic = document.getElementById("addSliderPic");
@@ -165,6 +173,8 @@ function addPic(e){
   photos.push(newUrl);
   slideIdx = photos.length - 1;
   slideImg.setAttribute("src", photos[slideIdx]);
+  img.setAttribute("src", photos[slideIdx]);
+  fadeSliderContainer.appendChild(slideImg);
   slideSliderContainer.appendChild(slideImg);
   document.getElementById("newUrl").value = "";
   }
